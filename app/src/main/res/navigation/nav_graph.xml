@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navHome">
+    <fragment
+        android:id="@+id/navHome"
+        android:name="com.savvynomad.newsapp.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/navDetail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/navDetail"
+        android:name="com.savvynomad.newsapp.ui.detail.DetailFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="article"
+            app:argType="com.savvynomad.newsapp.model.Article" />
+    </fragment>
+    <fragment
+        android:id="@+id/navSaved"
+        android:name="com.savvynomad.newsapp.ui.save.SavedFragment"
+        android:label="Saved"
+        tools:layout="@layout/fragment_saved" >
+        <action
+            android:id="@+id/action_navSaved_to_navDetail"
+            app:destination="@id/navDetail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/navSettings"
+        android:name="com.savvynomad.newsapp.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
+</navigation>
