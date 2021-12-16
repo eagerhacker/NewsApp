@@ -3,15 +3,14 @@ package com.savvynomad.newsapp.ui.settings
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.preference.ListPreference
-import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.savvynomad.newsapp.R
-import com.savvynomad.newsapp.helper.Constants
+import com.savvynomad.newsapp.utils.Constants
 
 class SettingsFragment : PreferenceFragmentCompat() {
+
 
     private lateinit var sp : SharedPreferences
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -29,5 +28,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
     }
+
+
 
 }

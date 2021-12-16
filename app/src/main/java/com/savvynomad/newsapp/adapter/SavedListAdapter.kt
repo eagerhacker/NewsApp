@@ -61,7 +61,7 @@ class SavedListAdapter(val onItemClickListener: OnItemClickListener) :
             return oldItem.url == newItem.url
         }
 
-        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+        override fun areContentsTheSame(oldItem:Article, newItem:Article): Boolean {
             return oldItem == newItem
         }
 

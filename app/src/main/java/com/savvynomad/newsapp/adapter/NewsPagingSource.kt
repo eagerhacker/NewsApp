@@ -3,7 +3,7 @@ package com.savvynomad.newsapp.adapter
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.savvynomad.newsapp.api.ApiService
-import com.savvynomad.newsapp.helper.Constants
+import com.savvynomad.newsapp.utils.Constants
 import com.savvynomad.newsapp.model.Article
 
 const val FIRST_PAGE = 1

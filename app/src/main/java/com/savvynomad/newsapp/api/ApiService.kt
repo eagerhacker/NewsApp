@@ -1,6 +1,5 @@
 package com.savvynomad.newsapp.api
 
-import com.savvynomad.newsapp.model.NewsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

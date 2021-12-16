@@ -3,41 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navHome">
+    app:startDestination="@id/fragment_home">
     <fragment
-        android:id="@+id/navHome"
+        android:id="@+id/fragment_home"
         android:name="com.savvynomad.newsapp.ui.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home">
+
         <action
-            android:id="@+id/action_homeFragment_to_detailFragment"
-            app:destination="@id/navDetail"
+            android:id="@+id/action_fragment_home_to_fragment_detail2"
+            app:destination="@id/fragment_detail"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
+
+
     </fragment>
     <fragment
-        android:id="@+id/navDetail"
+        android:id="@+id/fragment_detail"
         android:name="com.savvynomad.newsapp.ui.detail.DetailFragment"
         android:label="Detail"
-        tools:layout="@layout/fragment_detail" >
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="article"
             app:argType="com.savvynomad.newsapp.model.Article" />
     </fragment>
     <fragment
-        android:id="@+id/navSaved"
+        android:id="@+id/fragment_saved"
         android:name="com.savvynomad.newsapp.ui.save.SavedFragment"
         android:label="Saved"
-        tools:layout="@layout/fragment_saved" >
+        tools:layout="@layout/fragment_saved">
+
         <action
-            android:id="@+id/action_navSaved_to_navDetail"
-            app:destination="@id/navDetail"
+            android:id="@+id/action_fragment_saved_to_fragment_detail2"
+            app:destination="@id/fragment_detail"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/navSettings"

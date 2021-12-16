@@ -12,13 +12,14 @@ data class Article(
     @PrimaryKey
     @NonNull
     val url: String,
-    val author: String,
+    val author: String?,
     val content: String?,
-    val description: String,
+    val description: String?,
     @ColumnInfo(name = "published_at")
-    val publishedAt: String,
-    val source: Source,
-    val title: String,
+    val publishedAt: String?,
+    val source: Source?,
+    val title: String?,
     @ColumnInfo(name = "url_to_image")
-    val urlToImage: String
+    val urlToImage: String?,
+    var isBookmarked: Boolean? = false
 ) : Parcelable

@@ -1,38 +1,36 @@
 package com.savvynomad.newsapp.ui.home
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuItemCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
-import com.savvynomad.newsapp.MyApplication
 import com.savvynomad.newsapp.R
 import com.savvynomad.newsapp.adapter.NewsPagingAdapter
 import com.savvynomad.newsapp.databinding.FragmentHomeBinding
 import com.savvynomad.newsapp.model.Article
-import com.savvynomad.newsapp.viewmodel.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home), NewsPagingAdapter.OnItemClickListener {
     private val viewModel: NewsViewModel by viewModels()
 
+
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: NewsPagingAdapter
 
+    @ExperimentalPagingApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,13 +43,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), NewsPagingAdapter.OnItemC
             progressBar.visibility = View.VISIBLE
         }
 
-        /*lifecycleScope.launch {
-            viewModel.getNews().collectLatest {
-                adapter.submitData(it)
-                Log.d("Log_TAG", "onViewCreated: $it")
-            }
-        }*/
-
         viewModel.news.observe(viewLifecycleOwner) {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
@@ -61,7 +52,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), NewsPagingAdapter.OnItemC
                 progressBar.isVisible = loadState.source.refresh is LoadState.Loading
             }
         }
-
 
         setHasOptionsMenu(true)
 
@@ -79,6 +69,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), NewsPagingAdapter.OnItemC
                 if (query != null) {
                     viewModel.searchArticles(query)
                     searchView.clearFocus()
+                    binding.recyclerView.smoothScrollToPosition(0)
                 }
                 return true
             }
@@ -89,6 +80,18 @@ class HomeFragment : Fragment(R.layout.fragment_home), NewsPagingAdapter.OnItemC
 
 
         })
+
+        searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                viewModel.searchArticles("")
+                return true
+            }
+        })
+
     }
 
     override fun onDestroy() {
@@ -97,9 +100,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), NewsPagingAdapter.OnItemC
     }
 
     override fun onItemClick(article: Article) {
-        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(article)
+        val action = HomeFragmentDirections.actionFragmentHomeToFragmentDetail2(article)
         findNavController().navigate(action)
     }
-
 
 }

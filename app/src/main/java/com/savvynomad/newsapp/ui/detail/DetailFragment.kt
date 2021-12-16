@@ -5,20 +5,16 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.savvynomad.newsapp.R
-import com.savvynomad.newsapp.adapter.NewsPagingAdapter
-import com.savvynomad.newsapp.databinding.BottomSheetLayoutBinding
 import com.savvynomad.newsapp.databinding.FragmentDetailBinding
-import com.savvynomad.newsapp.viewmodel.NewsViewModel
+import com.savvynomad.newsapp.ui.home.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -55,7 +51,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
 
             floatingActionButton.setOnClickListener {
-                viewModel.saveArticle(article)
+                article.isBookmarked = true
+
                 Snackbar.make(
                     detailLayout, "Added to bookmark", Snackbar.LENGTH_SHORT
                 ).show()

@@ -39,7 +39,7 @@
                 android:textStyle="bold"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/ivArticle"
-
+                android:textColor="@color/text_color"
                 app:layout_constraintStart_toStartOf="@+id/ivArticle"
                 app:layout_constraintTop_toBottomOf="@id/ivArticle"
                 tools:visibility="visible" />
@@ -55,6 +55,7 @@
                 android:maxLines="5"
                 android:requiresFadingEdge="vertical"
                 android:text="@string/content"
+                android:textColor="@color/text_color"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/ivArticle"

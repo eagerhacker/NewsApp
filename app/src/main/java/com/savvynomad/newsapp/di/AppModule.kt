@@ -1,7 +1,7 @@
 package com.savvynomad.newsapp.di
 
 import android.app.Application
-import android.content.Context
+import androidx.room.Room
 import com.savvynomad.newsapp.api.ApiService
 import com.savvynomad.newsapp.database.ArticleDao
 import com.savvynomad.newsapp.database.ArticleDatabase
@@ -45,13 +45,20 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabase(context: Application): ArticleDatabase {
-        return ArticleDatabase.getDatabase(context)
+        return Room.databaseBuilder(
+            context,
+            ArticleDatabase::class.java,
+            "news_database"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides
     @Singleton
     fun provideArticleDao(articleDatabase: ArticleDatabase): ArticleDao =
         articleDatabase.articleDao()
+
 }
 
 
